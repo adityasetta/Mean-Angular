@@ -1,11 +1,20 @@
 const express = require('express');
-const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
 
 const Post = require('./models/post');
 
 const app = express();
 
+mongoose.connect("mongodb+srv://adit:QpCwqt7dLEglNq30@cluster0.almrq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+  .then(() => {
+    console.log('Connected!')
+  })
+  .catch(() => {
+    console.log('Connection Failed!')
+  });
+
 app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 app.use((req,res,next)=>{
   res.setHeader("Access-Control-Allow-Origin","*");
