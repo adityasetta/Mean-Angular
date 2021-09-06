@@ -5,12 +5,14 @@ const Post = require('./models/post');
 
 const app = express();
 
-mongoose.connect("mongodb+srv://adit:QpCwqt7dLEglNq30@cluster0.almrq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+console.log('Start to connect');
+
+mongoose.connect("mongodb+srv://aditya:testingpassword2@cluster0.almrq.mongodb.net/mean-test?retryWrites=true&w=majority")
   .then(() => {
-    console.log('Connected!')
+    console.log('Connected!');
   })
   .catch(() => {
-    console.log('Connection Failed!')
+    console.log('Connection Failed!');
   });
 
 app.use(express.json());
@@ -28,7 +30,7 @@ app.post("/api/posts", (req, res, next) => {
     title: req.body.title,
     content: req.body.content
   });
-  console.log(post);
+  post.save();
   res.status(201).json({
     message: 'Post added!'
   });
