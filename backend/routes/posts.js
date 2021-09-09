@@ -8,7 +8,7 @@ const router = express.Router();
 const MIME_TYPE_MAP = {
   'image/png': 'png',
   'image/jpeg': 'jpg',
-  'image/jpg': 'jpg',
+  'image/jpg': 'jpg'
 };
 
 const storage = multer.diskStorage({
@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
     if(isValid){
       error = null;
     }
-    cb(null, "backend/images");
+    cb(error, "backend/images");
   },
   filename: (req, file, cb) => {
     const name = file.originalname.toLowerCase().split(' ').join('-');
@@ -27,15 +27,24 @@ const storage = multer.diskStorage({
   }
 });
 
-router.post("", multer(storage).single("image"), (req, res, next) => {
+router.post("", multer({storage: storage}).single("image"), (req, res, next) => {
+  const url = req.protocol + '://' + req.get("host");
   const post = new Post({
     title: req.body.title,
-    content: req.body.content
+    content: req.body.content,
+    imagePath: url + "/images/" + req.file.filename
   });
   post.save().then(result => {
     res.status(201).json({
       message: 'Post added!',
-      postId: result._id
+      post: {
+        ...result, // get and copy all value from result
+        id: result._id,
+        // may also use these
+        // title: result.title,
+        // content: result.content,
+        // imagePath: result.imagePath
+      }
     });
   });
 });
