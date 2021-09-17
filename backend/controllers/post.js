@@ -74,7 +74,7 @@ exports.updatePost = (req, res, next) => {
     creator: req.userData.userId
   });
   Post.updateOne({ _id: req.params.id, creator: req.userData.userId },post).then(result => {
-    if( result.nModified>0 ){
+    if( result.modifiedCount>0 ){
       res.status(200).json({message: "Post updated!"});
     }
     else{
@@ -108,7 +108,7 @@ exports.deletePost = (req,res,next)=>{
   Post.deleteOne({_id: req.params.id, creator: req.userData.userId}).
     then(result => {
       //console.log(result); //this to check parameter to indicate success/failed
-      if( result.n > 0 ){
+      if( result.deletedCount > 0 ){
         res.status(200).json({message: "Post deleted!"});
       }
       else{
