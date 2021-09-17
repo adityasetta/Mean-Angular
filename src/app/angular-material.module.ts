@@ -18,7 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
-    MatDialogModule,
+    MatDialogModule
   ],
   exports:[
     MatInputModule,
@@ -28,7 +28,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
-    MatDialogModule,
+    MatDialogModule
   ]
 })
 export class AngularMaterialModule {}
