@@ -9,7 +9,7 @@ const app = express();
 
 console.log('Start to connect');
 
-mongoose.connect("mongodb+srv://aditya:testingpassword2@cluster0.almrq.mongodb.net/mean-test?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://aditya:" + process.env.MONGO_ATLAS_PW + "@cluster0.almrq.mongodb.net/mean-test?retryWrites=true&w=majority")
   .then(() => {
     console.log('Connected!');
   })
